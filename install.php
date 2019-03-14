@@ -106,8 +106,8 @@ END;
 	$sqls = array_map('trim', explode(';', $sql));
 	foreach($sqls as $v) @mysql_query($v, $hd);
 	//清除缓存
-	@include_once('./Favorite/Common/common.php');
-	define('RUNTIME_PATH', './Favorite/Runtime/');
+	@include_once('./favorite/Common/common.php');
+	define('RUNTIME_PATH', './favorite/Runtime/');
 	$handle = @opendir(RUNTIME_PATH);
 	while($path = @readdir($handle)) {
 		if($path == '.' || $path == '..') continue;
