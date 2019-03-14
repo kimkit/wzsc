@@ -1,8 +1,8 @@
 #!/bin/bash
 
-rm -r config.php
+rm -rf config.php
 touch config.php
 chmod 777 config.php
-rm -r favorite/Runtime
+rm -rf favorite/Runtime
 mkdir favorite/Runtime
 chmod 777 favorite/Runtime
