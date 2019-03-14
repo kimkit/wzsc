@@ -1,0 +1,108 @@
+/**
+ * UI样式(AJAX)
+ * @author wenbin.wu@foxmail.com
+ * @copyright 2012
+ */
+
+img {border: none;}
+table.ui {margin: 0; padding:0; border-radius: 6px;}
+table.ui tr td.box-top {background: black; opacity: 0.3; filter: alpha(opacity=30); height: 6px;}
+table.ui tr td.box-top-left {background: black; opacity: 0.3; filter: alpha(opacity=30); width: 6px; height: 6px; border-top-left-radius: 6px;}
+table.ui tr td.box-top-right {background: black; opacity: 0.3; filter: alpha(opacity=30); width: 6px; height: 6px; border-top-right-radius: 6px;}
+table.ui tr td.box-left {background: black; opacity: 0.3; filter: alpha(opacity=30); width: 6px;}
+table.ui tr td.box-right {background: black; opacity: 0.3; filter: alpha(opacity=30); width: 6px; height: 6px;}
+table.ui tr td.box-bottom {background: black; opacity: 0.3; filter: alpha(opacity=30); height: 6px;}
+table.ui tr td.box-bottom-left {background: black; opacity: 0.3; filter: alpha(opacity=30); width: 6px; height: 6px; border-bottom-left-radius: 6px;}
+table.ui tr td.box-bottom-right {background: black; opacity: 0.3; filter: alpha(opacity=30); width: 6px; height: 6px; border-bottom-right-radius: 6px;}
+table.ui tr td.box-inner {border: 1px solid gray; background: white;}
+table.ui tr td.box-inner div.header {background: #0080C0; height: 30px; position: relative; display: block;}
+table.ui tr td.box-inner div.header h2 {font: normal 12px/30px Verdana; color: #EEEEEE; margin: 0; padding: 0 0 0 5px; text-align: center;}
+table.ui tr td.box-inner div.header a {position: absolute; top: 0; right: 10px; font: bold 12px/30px Verdana; text-decoration: none; color: white;}
+table.ui tr td.box-inner div.header a:hover {color: #EEEEEE;}
+table.ui tr td.box-inner div.input {height: 30px; margin: 5px; width: 250px;}
+table.ui tr td.box-inner div.input span {float: left; width: 70px; font: normal 12px/24px Verdana; text-align: right; padding: 6px 4px 0 0; color: gray;}
+table.ui tr td.box-inner div.input span.select {width:auto; padding-left: 10px;}
+table.ui tr td.box-inner div.input span.verfiy {width:auto; padding-left: 5px;}
+table.ui tr td.box-inner div.input span.verfiy img {border-radius: 2px;}
+table.ui tr td.box-inner div.input input {float: left; height:22px; width: 150px; font: normal 12px/22px Georgia,Verdana; border: 1px solid gray; margin-top: 6px; padding: 0 3px; border-radius:2px;}
+table.ui tr td.box-inner div.input input.search {margin: 0 5px 0 5px;}
+table.ui tr td.box-inner div.input input.title {width: 250px;}
+table.ui tr td.box-inner div.input input.area {width: 382px;}
+table.ui tr td.box-inner div.input input.verify {width: 90px;}
+table.ui tr td.box-inner div.input textarea {float: left; border: 1px solid gray; margin: 0; padding: 3px 3px; width: 382px; height: 60px; border-radius:2px; margin-top: 6px; font: normal 12px/20px Georgia,Verdana; overflow: hidden;}
+table.ui tr td.box-inner div.textarea {height: 72px;}
+table.ui tr td.box-inner div.input *.focus {border-color: #0080C0;}
+table.ui tr td.box-inner div.submit {padding: 5px 0 0 0; width: auto;}
+table.ui tr td.box-inner div.submit a.button {border: 1px solid #0072A8; width: 50px; height: 22px; float: left; font: normal 12px/22px Verdana; text-align: center; background: #0080C0; color: white; text-decoration: none; border-radius: 2px;}
+table.ui tr td.box-inner div.submit a.button:hover {background: gray; border: 1px solid #6B6B6B;}
+table.ui tr td.box-inner div.submit a.search {margin-right: 5px;}
+table.ui tr td.box-inner div.submit span.link {float: left; width: auto; padding-left: 10px; padding-top: 0;}
+table.ui tr td.box-inner div.submit span.link a {text-decoration: none; color: #0080C0;}
+table.ui tr td.box-inner div.submit span.link a:hover {color: black; text-decoration: underline;}
+table.ui tr td.box-inner div.tip {font: normal 12px/22px Georgia,Verdana; padding: 10px 30px; text-align: center;}
+table.ui tr td.box-inner div.sort {padding: 0 10px 10px 0;}
+table.ui tr td.box-inner div.sort a {display: inline-block; width: 70px; font: normal 12px/24px Georgia,Verdana; text-decoration: none; background: #EEEEEE; text-align: center; margin: 10px 0 0 10px; border-radius: 4px; color: gray;}
+table.ui tr td.box-inner div.sort a:hover, table.ui tr td.box-inner div.sort a.focus {color: white; background: gray;}
+
+/**
+ * 页面样式
+ * @author wenbin.wu@foxmail.com
+ * @copyright 2012
+ */
+
+body {margin: 0; padding: 0;}
+a {outline: none;}
+div#head {background: #0080C0;}
+div#head div.wrap {width: 800px; height: 34px; margin: 0 auto; overflow: hidden;}
+div#head div.wrap ul {list-style: none; float: left; margin: 0 auto; padding: 0;}
+div#head div.wrap ul.right {float: right;}
+div#head div.wrap ul li {float: left; margin: 0; padding: 0; height: 34px;}
+div#head div.wrap ul li a {text-decoration: none; color: white; font: normal 12px/34px Georgia,Verdana; height: 34px; display: inline-block; padding: 0 10px;}
+div#head div.wrap ul li a:hover {background: #006699;}
+div#head div.wrap ul li a.logo img {margin-top: 5px;}
+div#head div.wrap ul li a.logo:hover {background: none;}
+
+div#main {width: 800px; margin: 10px auto 0 auto; border: 1px solid #CCCCCC; overflow: auto; border-radius: 4px; box-shadow: 0 0 10px 0 #EEEEEE;}
+div#main div.wrap-left {float: left; width: 240px;}
+div#main div.wrap-left div {margin: 10px;}
+div#main div.wrap-left div h2 {margin: 0; padding: 0 10px; font: normal 12px/24px Georgia,Verdana; border-bottom: 1px solid #DDDDDD; text-align: center;}
+div#main div.wrap-left div p {margin: 0; padding: 0 10px; font: normal 12px/24px Georgia,Verdana; border-bottom: 1px solid #EEEEDD; color: gray;}
+div#main div.wrap-left div ul {margin: 0; padding: 0; list-style: none;}
+div#main div.wrap-left div ul li {display: block; font: normal 12px/24px Georgia,Verdana; border-bottom: 1px solid #EEEEDD; padding: 0 10px;}
+div#main div.wrap-left div ul li a {text-decoration: none; color: #0080C0;}
+div#main div.wrap-left div ul li a:hover {color: black;}
+div#main div.wrap-left div ul li span.index {display: inline-block; width: 20px; font-style: italic; color: gray;}
+div#main div.wrap-right {float: right; width: 550px; padding-bottom: 10px;}
+div#main div.wrap-right div.info {padding: 0 10px; margin: 10px 10px 0 10px; font: normal 12px/24px Georgia,Verdana; border-bottom: 1px solid #DDDDDD;}
+div#main div.wrap-right div.info a {text-decoration: none; color: black;}
+div#main div.wrap-right div.info a:hover {text-decoration: underline;}
+div#main div.wrap-right ul.list {margin: 0; padding: 0; list-style: none;}
+div#main div.wrap-right ul.list li {padding: 0 10px; font: normal 12px/24px Georgia,Verdana; overflow: auto; position: relative; height: 50px; overflow: hidden;}
+div#main div.wrap-right ul.list li div.link {heihgt: 24px; border-bottom: 1px solid #EEEEDD; background: url(../images/info_button.gif) no-repeat 10px -42px;}
+div#main div.wrap-right ul.list li div.link a {text-decoration: none; color: #0080C0; padding: 0 10px 0 25px;}
+div#main div.wrap-right ul.list li div.link a:hover {color: black;}
+div#main div.wrap-right ul.list li div.more {height: 24px; border-bottom: 1px solid white; padding: 0 10px; margin: 0;}
+div#main div.wrap-right ul.list li div.more span {float: left; margin: 0 1px; color: silver;}
+div#main div.wrap-right ul.list li div.more span.user {background: url(../images/info_button.gif) no-repeat 0 6px; padding-left: 15px;}
+div#main div.wrap-right ul.list li div.more span.date {float: right; width: 110px; overflow: hidden; text-align: right; background: url(../images/info_button.gif) no-repeat 0 -18px;}
+div#main div.wrap-right ul.list li div.more span.fnum, div#main div.wrap-right ul.list li div.more span.cnum {float: right; width: 65px; overflow: hidden;}
+div#main div.wrap-right ul.list li div.more span a {text-decoration: none; color: silver;}
+div#main div.wrap-right ul.list li div.more span a:hover {color: #0080C0;}
+div#main div.wrap-right ul.list li div.func {position: absolute; top: 6px; right: 20px; display: none;}
+div#main div.wrap-right ul.list li div.func a {float: right; width: 12px; height: 12px; margin-left: 8px; text-indent: -10000px; overflow: hidden;}
+div#main div.wrap-right ul.list li div.func a.edit {background: url(../images/func_button.gif) no-repeat -12px -12px;}
+div#main div.wrap-right ul.list li div.func a.delete {background: url(../images/func_button.gif) no-repeat 0px -12px;}
+div#main div.wrap-right ul.list li div.func a.save {background: url(../images/func_button.gif) no-repeat -24px -12px;}
+div#main div.wrap-right ul.list li div.func a.edit:hover {background: url(../images/func_button.gif) no-repeat -12px 0;}
+div#main div.wrap-right ul.list li div.func a.delete:hover {background: url(../images/func_button.gif) no-repeat 0px 0;}
+div#main div.wrap-right ul.list li div.func a.save:hover {background: url(../images/func_button.gif) no-repeat -24px 0;}
+
+div#main div.wrap-right div.page {font: normal 12px/24px Georgia,Verdana; text-align: center;}
+div#main div.wrap-right div.page a {color: #0080C0; text-decoration: none; margin: 0 5px;}
+div#main div.wrap-right div.page a:hover {color: black;}
+div#main div.wrap-right div.page a.disabled {color: black;}
+
+div#foot {padding: 10px 0 40px 0;}
+div#foot p {font: normal 12px/24px Georgia,Verdana; text-align: center; margin: 0; padding: 0;}
+div#foot p a {text-decoration: none; color: #0080C0;}
+div#foot p a:hover {color: black;}

@@ -1,0 +1,37 @@
+<include file="header" />
+<div id="container" class="so_main">
+	<div class="page_tit">系统信息</div>
+	<div class="form2">
+		<div>
+			<dl class="lineD"><dt><strong>PHP版本：</strong></dt><dd>{$sys.php}</dd></dl>
+			<dl class="lineD"><dt><strong>服务器软件：</strong></dt><dd>{$sys.server}</dd></dl>
+			<dl class="lineD"><dt><strong>MySQL版本：</strong></dt><dd>{$sys.mysql}</dd></dl>
+			<dl><dt><strong>数据库大小：</strong></dt><dd>{$sys.dbsize}</dd></dl>
+		</div>
+	</div>
+	<div class="page_tit">统计信息</div>
+	<div class="form2">
+		<div>
+			<dl class="lineD"><dt><strong>注册用户：</strong></dt><dd>{$sys.user}</dd></dl>
+			<dl class="lineD"><dt><strong>网址收藏：</strong></dt><dd>{$sys.link}</dd></dl>
+			<!--
+			<dl class="lineD"><dt><strong>系统分类：</strong></dt><dd>{$sys.sort}</dd></dl>
+			-->
+			<dl><dt><strong>未读留言：</strong></dt><dd>{$sys.feed}</dd></dl>
+		</div>
+	</div>
+	<div class="page_tit">其他信息</div>
+	<div class="form2">
+		<div>
+			<dl class="lineD">
+				<dt><strong>软件开发者：</strong></dt>
+				<dd><a href="mailto:wenbin.wu@foxmail.com">wenbin.wu@foxmail.com</a></dd>
+			</dl>
+			<dl>
+				<dt><strong>系统详细信息：</strong></dt>
+				<dd><a href="{:U('Admin/sys_info')}">点击查看 phpinfo() </a></dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<include file="footer" />

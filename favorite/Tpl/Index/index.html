@@ -1,0 +1,223 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="{$_tpl_url}css/main.css" />
+	<script type="text/javascript" src="{$_tpl_url}js/jquery.min.js"></script>
+	<script type="text/javascript" src="{$_tpl_url}js/jquery.extend.js"></script>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="网址收藏,收藏夹,书签," />
+	<meta name="description" content="收集喜欢的网址，分享或备份" />
+	<php>
+		$title = empty($user) ? '' : $user['uname'].' - ';
+		$title .= empty($sort) ? '' : $sort['title'].' - ';
+	</php>
+	<title>{$title}网址收藏</title>
+</head>
+<body>
+<div id="head">
+	<div class="wrap">
+		<ul>
+			<!--
+			<li><a href="{$_root}" class="logo"><img src="{$_tpl_url}images/logo.gif" /></a></li>
+			-->
+			<li><a href="{:U('Index/index')}">首页</a></li>
+			<li><a href="{:U('Index/index', array('type' => 'hot'))}">热门 ({$hot_count})</a></li>
+			<php>if(!empty($_user)) {</php>
+				<li><a href="{:U('Index/index', array('uid' => $_user['uid']))}">我的收藏 ({$my_count})</a></li>
+			<php>}</php>
+		</ul>
+		
+		<ul class="right">
+				<li><a href="javascript:void(0)" onclick="$.box.pop.ui.search()">搜索</a></li>
+			<php>if(!empty($_user)) {</php>
+				<li><a href="javascript:void(0)" onclick="$.box.pop.ui.publish()">添加</a></li>
+				<li><a href="javascript:void(0)" onclick="$.box.pop.ui.setting()">设置</a></li>
+				<li><a href="{:U('Index/logout')}">退出</a></li>
+			<php>} else {</php>
+				<li><a href="javascript:void(0)" onclick="$.box.pop.ui.login()">登录</a></li>
+				<li><a href="javascript:void(0)" onclick="$.box.pop.ui.register()">注册</a></li>
+			<php>}</php>
+		</ul>
+	</div>
+</div>
+<div id="main">
+	<div class="wrap-left">
+		<php>if(!empty($user) && ($user['uid'] == $_user['uid'] || $_user['lvl'])) {</php>
+			<div>
+				<h2># {$user.uname|htmlspecialchars} #</h2>
+				<p>电话号码：{$user.phone}</p>
+				<p>所在地区：{$user.area1}&nbsp;&nbsp;{$user.area2}&nbsp;&nbsp;{$user.area3|htmlspecialchars}</p>
+				<php>if($user['last_login_ip']) {</php>
+					<p>上次登录：{$user.last_login_ip}</p>
+				<php>}</php>
+			</div>
+		<php>} elseif(!empty($user)) {</php>
+			<div>
+				<h2># {$user.uname|htmlspecialchars} #</h2>
+				<p>提示：你无权查看此用户详细信息 !</p>
+			</div>
+		<php>}</php>
+		
+		<div>
+			<h2>收藏分类</h2>
+			<ul>
+				<volist name="list_sort" id="vo">
+					<php>
+						$params = array();
+						if(!empty($user)) $params['uid'] = $user['uid'];
+						$params['sid'] = $vo['sid'];
+						$url = U('Index/index', $params);
+						$_list_sort[] = array('sid' => $vo['sid'], 'title' => $vo['title']);
+					</php>
+					<li><span class="index">{$i}.</span><a href="{$url}">{$vo.title|htmlspecialchars}</a></li>
+				</volist>
+				<script type="text/javascript">
+					$(function() {
+						$.box.pop.ui.data.sort = {:json_encode($_list_sort)};
+					});
+				</script>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="wrap-right">
+		<div class="info">
+			<php>
+				$params = array();
+				if(!empty($user)) $params['uid'] = $user['uid'];
+				$url = U('Index/index', $params);
+				
+				$params = array();
+				switch($type) {
+					case 'search':
+						if(!empty($user)) $params['uid'] = $user['uid'];
+						$params['type'] = 'search';
+						$params['key'] = $key;
+						$tag_name = '搜索：'.$key;
+						break;
+					case 'hot':
+						$params['type'] = 'hot';
+						$tag_name = '热门';
+						break;
+					default:
+						$tag_name = '全部';
+						if(!empty($user)) {
+							$params['uid'] = $user['uid'];
+							//$tag_name = '全部';
+						}
+						if(!empty($sort)) {
+							$params['sid'] = $sort['sid'];
+							$tag_name = htmlspecialchars($sort['title']);
+						}
+				}
+				$tag_url = U('Index/index', $params);
+			</php>
+			<a href="{$url}">首页</a>&nbsp;&nbsp;-&nbsp;
+			<a href="{$tag_url}">{$tag_name} ({$count})</a>
+		</div>
+		<ul class="list">
+			<volist name="list_link" id="vo">
+				<li>
+					<div class="link">
+						<a href="{$vo.url|htmlspecialchars}" target="_blank">{:htmlspecialchars(str_cut($vo['title'], 70))}</a>
+					</div>
+					<div class="more">
+						<span class="user"><a href="{:U('Index/index', array('uid' => $vo['uid']))}">{$vo.uname|htmlspecialchars}</a></span>
+						<span class="date">{:date('m月d日 H:i', $vo['ctime'])}</span>
+					</div>
+					<php>if(!empty($_user)) {</php>
+						<div class="func">
+							<php>if($_user['uid'] == $vo['uid']) {</php>
+								<a href="javascript:void(0)" onclick="$.box.pop.ui.del({$vo.lid})" class="delete" title="删除">删除</a>
+								<a href="javascript:void(0)" onclick="$.box.pop.ui.edit({$vo.lid})" class="edit" title="编辑">编辑</a>
+							<php>} else {</php>
+								<a href="javascript:void(0)" onclick="$.box.pop.ui.save({$vo.lid})" class="save" title="收藏">收藏</a>
+							<php>}</php>
+						</div>
+					<php>}</php>
+				</li>
+			</volist>
+		</ul>
+		<script type="text/javascript">
+			$(function() {
+				$('ul.list li').bind('mouseover', function() {
+					$('div.func', this).css({'display': 'block'});
+				}).bind('mouseout', function(){
+					$('div.func', this).css({'display': 'none'});
+				});
+			});
+		</script>
+		<div class="page">
+			<php>
+				if($page == 1) $prev = 'javascript:void(0)';
+				else {
+					$params['page'] = $page - 1;
+					$prev = U('Index/index', $params);
+				}
+				if($page == $page_count) $next = 'javascript:void(0)';
+				else {
+					$params['page'] = $page + 1;
+					$next = U('Index/index', $params);
+				}
+			</php>
+			<a href="{$prev}">上一页</a>
+			<span>({$page}/{$page_count})</span>
+			<a href="{$next}">下一页</a>
+			<script type="text/javascript">
+				$(function() {
+					$('div.page a[href="javascript:void(0)"]').addClass('disabled');
+				});
+			</script>
+		</div>
+	</div>
+</div>
+<div id="foot">
+	<p>
+		<a href="javascript:void(0)" onclick="$.box.pop.ui.version()">关于一切</a>&nbsp;&nbsp;|&nbsp;
+                <a href="javascript:void(0)" onclick="$.box.pop.ui.about()">网站纪实</a>&nbsp;&nbsp;|&nbsp;
+		<a href="javascript:void(0)" onclick="$.box.pop.ui.feed()">倾听声音</a>&nbsp;&nbsp;|&nbsp;
+		<a href="{:U('Admin/index')}">后台管理</a>&nbsp;&nbsp;|&nbsp;
+		<a href="javascript:void(0)" onclick="$(window).scrollTop(0)">回到顶部</a> 
+	<br><script src="http://10.58.58.90/count/cf.asp?username=nnga"></script>
+</p>
+</div>
+
+<php>if(!empty($_user)) {</php>
+	<script type="text/javascript">
+		$(function() {
+			$.box.pop.ui.data._userData = {
+				'uname': {$_user.uname|json_encode},
+				'phone': {$_user.phone|json_encode},
+				'area1': {$_user.area1|json_encode},
+				'area2': {$_user.area2|json_encode},
+				'area3': {$_user.area3|json_encode}
+			};
+		});
+	</script>
+<php>}</php>
+
+<script type="text/javascript">
+	$(function() {
+		$.box.pop.ui.data.area = {$area|json_encode};
+		$.box.pop.ui.data.loginStatus = {:intval(!empty($_user))};
+		$.box.pop.ui.data.verifyUrl = '{:U("Index/verify", array('time' => '__T__'))}';
+		$.box.pop.ui.data.loginUrl = '{:U("Index/login")}';
+		$.box.pop.ui.data.getLinkUrl = '{:U("Index/getLink")}';
+		$.box.pop.ui.data.registerUrl = '{:U("Index/register")}';
+		$.box.pop.ui.data.settingUrl = '{:U("Index/setting")}';
+		$.box.pop.ui.data.feedUrl = '{:U("Index/feed")}';
+		$.box.pop.ui.data.feedSearchUrl = '{:U("Index/feedSearch")}';
+		$.box.pop.ui.data.linkUrl = '{:U("Index/link")}';
+		$.box.pop.ui.data.linkDelUrl = '{:U("Index/linkDel")}';
+		$.box.pop.ui.data.searchHomeUrl = '{:U("Index/index", array('type' => 'search','key' => '__KEY__'))}';
+		$.box.pop.ui.data.searchUserUrl = '{:U("Index/index", array('uid' => $_user['uid'],'type' => 'search','key' => '__KEY__'))}';
+		$.box.pop.ui.data.setpwdUrl = '{:U("Index/setpwd")}';
+		$.box.pop.ui.data.isIntact = {:intval($is_intact)};
+		
+		if(!$.box.pop.ui.data.isIntact) $.box.pop.ui.setting();
+		
+	});
+</script>
+
+</body>
+</html>

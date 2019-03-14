@@ -1,0 +1,58 @@
+<include file="header" />
+<div class="so_main">
+	<div class="page_tit">登录列表</div>
+	<div class="Toolbar_inbox">
+		<div class="page right">{$page_html}</div>
+		<a href="javascript:void(0);" class="btn_a" onclick="del(null)"><span>删除记录</span></a>
+	</div>
+  
+	<div class="list">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<th style="width:30px;">
+				<input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+				<label for="checkbox"></label>
+			</th>
+			<th class="line_l" width="50">ID</th>
+			<th class="line_l">用户昵称</th>
+			<th class="line_l">用户ID</th>
+			<th class="line_l">IP地址</th>
+			<th class="line_l">登录时间</th>			
+			<th class="line_l">操作</th>
+		</tr>
+	
+	<volist name="list_llog" id="vo">
+		<tr overstyle='on'>
+			<td><input type="checkbox" name="checkbox" onclick="checkon(this)" value="{$vo.id}"></td>
+			<td>{$vo.id}</td>
+			<td>{$vo._data.user.uname}</td>
+			<td>{$vo.uid}</td>
+			<td>{$vo.ip}</td>
+			<td>{:date('Y-m-d H:i', $vo['ctime'])}</td>
+			<td>
+				<a href="javascript:void(0)" onclick="del({$vo.id})">删除</a>
+			</td>
+		</tr>
+	</volist>
+		</table>
+	</div>
+	
+	<div class="Toolbar_inbox">
+		<div class="page right">{$page_html}</div>
+		<a href="javascript:void(0);" class="btn_a" onclick="del(null)"><span>删除记录</span></a>
+	</div>
+	
+	<script type="text/javascript">
+		function del(id) {
+			var ids = id ? [id] : getChecked();
+			if(ids.length == 0) {alert('请选择需要删除的项目!'); return;}
+			if(!confirm('确定要删除所选项?')) {return;}
+			var form = '<form id="_del" method="post" action="{:U('Admin/llog_del')}">'
+			+'<input type="hidden" name="id" value="'+ids.join(',')+'" />'
+			+'</form>';
+			$('body').append(form);
+			$('#_del').submit();
+		}
+	</script>
+</div>
+<include file="footer" />

@@ -1,0 +1,79 @@
+<include file="header" />
+<div class="so_main">
+	<div class="page_tit">用户列表</div>
+	<div class="Toolbar_inbox">
+		<div class="page right">{$page_html}</div>
+		<a href="{:U('Admin/user_search')}" class="btn_a"><span>搜索用户</span></a>
+		<a href="{:U('Admin/user_add')}" class="btn_a"><span>添加用户</span></a>
+		<a href="javascript:void(0);" class="btn_a" onclick="del(null)"><span>删除用户</span></a>
+	</div>
+  
+	<div class="list">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<th style="width:30px;">
+				<input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+				<label for="checkbox"></label>
+			</th>
+			<th class="line_l" width="50">ID</th>
+			<th class="line_l">昵称</th>
+			<th class="line_l">用户名</th>
+			<th class="line_l">权限</th>
+			<th class="line_l">状态</th>
+			<th class="line_l">电话</th>
+			<!--
+			<th class="line_l">地址</th>
+			-->
+			<th class="line_l">创建时间</th>			
+			<th class="line_l">操作</th>
+		</tr>
+	
+	<volist name="list_user" id="vo">
+		<tr overstyle='on'>
+			<td><input type="checkbox" name="checkbox" onclick="checkon(this)" value="{$vo.uid}"></td>
+			<td>{$vo.uid}</td>
+			<td>{$vo.uname}</td>
+			<td>{$vo.usr}</td>
+			<td>
+				<php>if($vo['lvl']) {</php><span style="color:red;">超级</span>
+				<php>} else {</php><span>普通</span><php>}</php>
+			</td>
+			<td>
+				<php>if($vo['state']) {</php><span style="color:red;">锁定</span>
+				<php>} else {</php><span>正常</span><php>}</php>
+			</td>
+			<td>{$vo.phone}</td>
+			<!--
+			<td>{$vo.area1},{$vo.area2},{$vo.area3}</td>
+			-->
+			<td>{:date('Y-m-d H:i', $vo['ctime'])}</td>
+			<td>
+				<a href="{:U('Admin/user_edit', array('uid' => $vo['uid']))}">编辑</a>&nbsp;
+				<a href="javascript:void(0)" onclick="del({$vo.uid})">删除</a>
+			</td>
+		</tr>
+	</volist>
+		</table>
+	</div>
+	
+	<div class="Toolbar_inbox">
+		<div class="page right">{$page_html}</div>
+		<a href="{:U('Admin/user_search')}" class="btn_a"><span>搜索用户</span></a>
+		<a href="{:U('Admin/user_add')}" class="btn_a"><span>添加用户</span></a>
+		<a href="javascript:void(0);" class="btn_a" onclick="del(null)"><span>删除用户</span></a>
+	</div>
+	
+	<script type="text/javascript">
+		function del(id) {
+			var ids = id ? [id] : getChecked();
+			if(ids.length == 0) {alert('请选择需要删除的项目!'); return;}
+			if(!confirm('确定要删除所选项?')) {return;}
+			var form = '<form id="_del" method="post" action="{:U('Admin/user_del')}">'
+			+'<input type="hidden" name="uid" value="'+ids.join(',')+'" />'
+			+'</form>';
+			$('body').append(form);
+			$('#_del').submit();
+		}
+	</script>
+</div>
+<include file="footer" />
