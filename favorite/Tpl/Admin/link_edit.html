@@ -1,1 +1,63 @@
-<include file="header" /><div class="so_main">	<div class="page_tit">编辑收藏</div>  	<div class="form2">		<form action="{:U('Admin/link_edit')}" method="post">			<input type="hidden" name="lid" value="{$link.lid}" />			<dl class="lineD">				<dt>标  题：</dt>				<dd>					<input type="text" name="title" value="{$link.title|htmlspecialchars}" size="30" />					<span> *</span>				</dd>  			</dl>						<dl class="lineD">				<dt>网  址：</dt>				<dd>					<input type="text" name="url" value="{$link.url|htmlspecialchars}" size="50" />					<span> *</span>				</dd>  			</dl>						<dl class="lineD">				<dt>分  类：</dt>				<dd>					<select name="sort">						<volist name="list_sort" id="vo">							<php>if($vo['sid'] == $link['sort']) {</php>								<option value="{$vo.sid}" selected="selected">{$vo.title|htmlspecialchars}</option>							<php>} else {</php>								<option value="{$vo.sid}">{$vo.title|htmlspecialchars}</option>							<php>}</php>						</volist>					</select>					<span></span>				</dd>  			</dl>						<dl class="lineD">				<dt>状  态：</dt>				<dd>					<php>if($link['own']) {</php>						<input type="radio" name="own" value="0" />公开						<input type="radio" name="own" value="1" checked="checked" />私有					<php>} else {</php>						<input type="radio" name="own" value="0" checked="checked" />公开						<input type="radio" name="own" value="1" />私有					<php>}</php>					<span></span>				</dd>  			</dl>						<div class="page_btm">				<input type="submit" value="确定" class="btn_b" />			</div>		</form>	</div></div><include file="footer" />
+<include file="header" />
+<div class="so_main">
+	<div class="page_tit">编辑收藏</div>
+		<div class="form2">
+			<form action="{:U('Admin/link_edit')}" method="post">
+				<input type="hidden" name="lid" value="{$link.lid}" />
+				<dl class="lineD">
+					<dt>标  题：</dt>
+					<dd>
+						<input type="text" name="title" value="{$link.title|htmlspecialchars}" size="30" />
+						<span> *</span>
+					</dd>
+				</dl>
+				<dl class="lineD">
+					<dt>网  址：</dt>
+					<dd>
+						<input type="text" name="url" value="{$link.url|htmlspecialchars}" size="50" />
+						<span> *</span>
+					</dd>
+				</dl>
+				<dl class="lineD">
+					<dt>排  序：</dt>
+					<dd>
+						<input type="text" name="rank" value="{$link.rank}" size="50" />
+						<span> *</span>
+					</dd>
+				</dl>
+				<dl class="lineD">
+					<dt>分  类：</dt>
+					<dd>
+						<select name="sort">
+							<volist name="list_sort" id="vo">
+							<php>if($vo['sid'] == $link['sort']) {</php>
+							<option value="{$vo.sid}" selected="selected">{$vo.title|htmlspecialchars}</option>
+							<php>} else {</php>
+							<option value="{$vo.sid}">{$vo.title|htmlspecialchars}</option>
+							<php>}</php>
+							</volist>
+						</select>
+						<span></span>
+					</dd>
+				</dl>
+				<dl class="lineD">
+					<dt>状  态：</dt>
+					<dd>
+						<php>if($link['own']) {</php>
+						<input type="radio" name="own" value="0" />公开
+						<input type="radio" name="own" value="1" checked="checked" />私有
+						<php>} else {</php>
+						<input type="radio" name="own" value="0" checked="checked" />公开
+						<input type="radio" name="own" value="1" />私有
+						<php>}</php>
+						<span></span>
+					</dd>
+				</dl>
+				<div class="page_btm">
+					<input type="submit" value="确定" class="btn_b" />
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<include file="footer" />

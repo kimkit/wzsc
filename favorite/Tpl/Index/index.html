@@ -35,7 +35,9 @@
 				<li><a href="{:U('Index/logout')}">退出</a></li>
 			<php>} else {</php>
 				<li><a href="javascript:void(0)" onclick="$.box.pop.ui.login()">登录</a></li>
+                <!--
 				<li><a href="javascript:void(0)" onclick="$.box.pop.ui.register()">注册</a></li>
+                -->
 			<php>}</php>
 		</ul>
 	</div>
@@ -81,6 +83,23 @@
 	</div>
 	
 	<div class="wrap-right">
+		<php>if($is_home) {</php>
+		<div style="height: 10px;"></div>
+		<php>foreach($list_sort as $vo) {</php>
+		<div class="info" style="margin-top: 0;">
+			<span>{$vo.title|htmlspecialchars}</span>
+		</div>
+		<div class="nav-container">
+			<php>foreach($list_link as $lo) {</php>
+			<php>if($lo['sort'] == $vo['sid']) {</php>
+			<div class="nav-link">
+				<a href="{$lo.url|htmlspecialchars}" target="_blank">{:htmlspecialchars(str_cut($lo['title'], 16))}</a>
+			</div>
+			<php>}</php>
+			<php>}</php>
+		</div>
+		<php>}</php>
+		<php>} else {</php>
 		<div class="info">
 			<php>
 				$params = array();
@@ -169,6 +188,7 @@
 				});
 			</script>
 		</div>
+		<php>}</php>
 	</div>
 </div>
 <div id="foot">
@@ -178,7 +198,7 @@
 		<a href="javascript:void(0)" onclick="$.box.pop.ui.feed()">倾听声音</a>&nbsp;&nbsp;|&nbsp;
 		<a href="{:U('Admin/index')}">后台管理</a>&nbsp;&nbsp;|&nbsp;
 		<a href="javascript:void(0)" onclick="$(window).scrollTop(0)">回到顶部</a> 
-	<br><script src="http://10.58.58.90/count/cf.asp?username=nnga"></script>
+	<br><!--<script src="http://10.58.58.90/count/cf.asp?username=nnga"></script>-->
 </p>
 </div>
 

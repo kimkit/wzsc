@@ -392,6 +392,9 @@ class AdminAction extends Action {
 			if(isset($_POST['sort'])) {
 				$data['sort'] = (int)$_POST['sort'];
 			}
+			if(isset($_POST['rank'])) {
+				$data['rank'] = (int)$_POST['rank'];
+			}
 			if(isset($_POST['own'])) {
 				$data['own'] = $_POST['own'] ? 1 : 0;
 			}

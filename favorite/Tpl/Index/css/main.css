@@ -106,3 +106,9 @@ div#foot {padding: 10px 0 40px 0;}
 div#foot p {font: normal 12px/24px Georgia,Verdana; text-align: center; margin: 0; padding: 0;}
 div#foot p a {text-decoration: none; color: #0080C0;}
 div#foot p a:hover {color: black;}
+
+div#main div.wrap-right div.nav-container {margin-left: 10px; overflow: auto;}
+div#main div.wrap-right div.nav-link {float: left; width: 160px; margin-left: 10px; overflow: hide; font: normal 12px/24px Georgia,Verdana; background: url(../images/info_button.gif) no-repeat 0 -42px;}
+div#main div.wrap-right div.nav-link a {text-decoration: none; color: #0080C0; margin-left: 16px;}
+div#main div.wrap-right div.nav-link a:hover {color: black;}
+

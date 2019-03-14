@@ -19,8 +19,9 @@
 			<th class="line_l" width="25%">名称</th>
 			<th class="line_l">分类(ID)</th>
 			<th class="line_l">状态</th>
+			<th class="line_l">排序</th>
 			<th class="line_l">收藏数</th>
-			<th class="line_l">创建时间</th>			
+			<th class="line_l" width="120">创建时间</th>			
 			<th class="line_l">操作</th>
 		</tr>
 	
@@ -35,6 +36,7 @@
 				<php>if($vo['own']) {</php><span style="color:red;">私有</span>
 				<php>} else {</php><span>公开</span><php>}</php>
 			</td>
+			<td>{$vo.rank}</td>
 			<td>{$vo.cnum}</td>
 			<td>{:date('Y-m-d H:i', $vo['ctime'])}</td>
 			<td>

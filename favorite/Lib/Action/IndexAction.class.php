@@ -10,6 +10,12 @@ class IndexAction extends Action {
 	//用户
 	private $_user = null;
 	
+	//主页导航用户ID
+	private $_home_uid = 1;
+
+	//主页导航最大数量
+	private $_home_limit = 1000;
+
 	//初始化操作
 	public function _initialize() {
 		$this->_user = session('user');
@@ -59,6 +65,16 @@ class IndexAction extends Action {
 		if($page < 1) $page = 1;
 		$each = 20;
 		$offset = ($page - 1) * $each;
+
+		$is_home = false;
+		$order_append = '';
+		if (!isset($_GET['uid']) && !isset($_GET['sid']) && !isset($_GET['type'])) {
+			$is_home = true;
+			$uid = $this->_home_uid;
+			$each = $this->_home_limit;
+			$offset = 0;
+			$order_append = 'a.rank DESC,';
+		}
 		
 		$map['a.own'] = 0;
 		if(isset($uid)) {
@@ -78,7 +94,7 @@ class IndexAction extends Action {
 
 		$prefix = C('DB_PREFIX');
 		$list_link = M('')->field("a.*, b.uname")->table(array($prefix."link" => "a"))
-		->join($prefix."user b ON a.uid = b.uid")->where($map)->order("a.lid DESC")->limit("{$offset},{$each}")->select();
+		->join($prefix."user b ON a.uid = b.uid")->where($map)->order("$order_append a.lid DESC")->limit("{$offset},{$each}")->select();
 		
 		$count = M('')->table(array($prefix."link" => "a"))->where($map)->count();
 		$page_count = ceil($count / $each);
@@ -120,6 +136,7 @@ class IndexAction extends Action {
 		$this->assign('my_count', $my_count);
 		
 		$this->assign('is_intact', $this->checkUser());
+		$this->assign('is_home', $is_home);
 		
 		$this->display();
     }
@@ -154,6 +171,8 @@ class IndexAction extends Action {
 	
 	//用户注册[ajax]
 	public function register() {
+		//禁用注册功能
+		$this->error('用户注册已停用!', true);
 		$data['usr'] = isset($_POST['usr']) ? trim($_POST['usr']) : '';
 		$data['pwd'] = isset($_POST['pwd']) ? trim($_POST['pwd']) : '';
 		$verify = isset($_POST['verify']) ? $_POST['verify'] : '';
