@@ -1,7 +1,7 @@
 <?php
 //定义项目名称和路径
-define('APP_NAME', 'Favorite');
-define('APP_PATH', './Favorite/');
+define('APP_NAME', 'favorite');
+define('APP_PATH', './favorite/');
 //引入配置文件
 @include_once('./config.php');
 //检查是否安装
