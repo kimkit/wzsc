@@ -21,7 +21,9 @@
 			<li><a href="{$_root}" class="logo"><img src="{$_tpl_url}images/logo.gif" /></a></li>
 			-->
 			<li><a href="{:U('Index/index')}">首页</a></li>
+			<!--
 			<li><a href="{:U('Index/index', array('type' => 'hot'))}">热门 ({$hot_count})</a></li>
+			-->
 			<php>if(!empty($_user)) {</php>
 				<li><a href="{:U('Index/index', array('uid' => $_user['uid']))}">我的收藏 ({$my_count})</a></li>
 			<php>}</php>
@@ -43,6 +45,7 @@
 	</div>
 </div>
 <div id="main">
+	<php>if(!$is_home) {</php>
 	<div class="wrap-left">
 		<php>if(!empty($user) && ($user['uid'] == $_user['uid'] || $_user['lvl'])) {</php>
 			<div>
@@ -81,8 +84,25 @@
 			</ul>
 		</div>
 	</div>
+	<php>} else {</php>
+	<php>
+		$_list_sort = array();
+		foreach ($list_sort as $vo) {
+			$_list_sort[] = array('sid' => $vo['sid'], 'title' => $vo['title']);
+		}
+	</php>
+	<script type="text/javascript">
+		$(function() {
+			$.box.pop.ui.data.sort = {:json_encode($_list_sort)};
+		});
+	</script>
+	<php>}</php>
 	
+	<php>if($is_home) {</php>
+	<div class="wrap-right" style="width: 800px;">
+	<php>} else {</php>
 	<div class="wrap-right">
+	<php>}</php>
 		<php>if($is_home) {</php>
 		<div style="height: 10px;"></div>
 		<php>foreach($list_sort as $vo) {</php>
@@ -196,7 +216,7 @@
 		<a href="javascript:void(0)" onclick="$.box.pop.ui.version()">关于一切</a>&nbsp;&nbsp;|&nbsp;
                 <a href="javascript:void(0)" onclick="$.box.pop.ui.about()">网站纪实</a>&nbsp;&nbsp;|&nbsp;
 		<a href="javascript:void(0)" onclick="$.box.pop.ui.feed()">倾听声音</a>&nbsp;&nbsp;|&nbsp;
-		<a href="{:U('Admin/index')}">后台管理</a>&nbsp;&nbsp;|&nbsp;
+		<a href="{:U('Admin/index')}" target="_blank">后台管理</a>&nbsp;&nbsp;|&nbsp;
 		<a href="javascript:void(0)" onclick="$(window).scrollTop(0)">回到顶部</a> 
 	<br><!--<script src="http://10.58.58.90/count/cf.asp?username=nnga"></script>-->
 </p>
