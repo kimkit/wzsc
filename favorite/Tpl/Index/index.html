@@ -44,6 +44,11 @@
 		</ul>
 	</div>
 </div>
+<php>if(strlen($notice) > 0) {</php>
+<div id="notice">
+	<p>{$notice|htmlspecialchars|nl2br}</p>
+</div>
+<php>}</php>
 <div id="main">
 	<php>if(!$is_home) {</php>
 	<div class="wrap-left">

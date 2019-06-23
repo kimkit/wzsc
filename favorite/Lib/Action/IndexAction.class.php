@@ -115,10 +115,19 @@ class IndexAction extends Action {
 		$hot_count = M('link')->where("cnum>0 AND own=0")->count();
 
 		//获取点击数最多的10条记录
-		$click_top_rows = M('link')->order("click desc")->limit(10)->select();
 		$click_top_lids = array();
-		foreach ($click_top_rows as $row) {
-			$click_top_lids[] = $row['lid'];
+		foreach ($list_sort as $row) {
+			$click_top_rows = M('link')->where("sort = {$row['sid']}")->order("click desc, lid desc")->limit(10)->select();
+			foreach ($click_top_rows as $_row) {
+				$click_top_lids[] = $_row['lid'];
+			}
+		}
+
+		//获取公告信息
+		$notice_row = M('config')->where("name = 'notice'")->find();
+		$notice = '';
+		if(!empty($notice_row)) {
+			$notice = $notice_row['value'];
 		}
 		
 		//地区信息
@@ -142,6 +151,7 @@ class IndexAction extends Action {
 		$this->assign('hot_count', $hot_count);
 		$this->assign('my_count', $my_count);
 		$this->assign('click_top_lids', $click_top_lids);
+		$this->assign('notice', $notice);
 		
 		$this->assign('is_intact', $this->checkUser());
 		$this->assign('is_home', $is_home);

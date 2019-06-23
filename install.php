@@ -103,6 +103,14 @@ CREATE TABLE IF NOT EXISTS `{$db_prefix}login` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
+CREATE TABLE IF NOT EXISTS `{$db_prefix}config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `value` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+
 END;
 
 	$sqls = array_map('trim', explode(';', $sql));

@@ -42,6 +42,7 @@ class AdminAction extends Action {
 				'收藏管理' => U('Admin/link'),
 				'分类管理' => U('Admin/sort'),
 				'用户留言' => U('Admin/feed'),
+				'公告管理' => U('Admin/notice'),
 				'登录历史' => U('Admin/llog')
 			)
 		);
@@ -519,5 +520,29 @@ class AdminAction extends Action {
 		$where = count($id) == 1 ? "id = '{$in}'" : "id IN ($in)";
 		if(M('login')->where($where)->delete()) $this->success('删除记录成功');
 		else $this->error('删除记录失败');
+	}
+
+	//公告编辑
+	public function notice() {
+		$notice_row = M("config")->where("name = 'notice'")->find();
+		if(empty($notice_row)) $notice = '';
+		else $notice = $notice_row['value'];
+		$this->assign('notice', $notice);
+		$this->display();
+	}
+
+	//公告保存
+	public function notice_save() {
+		$notice = isset($_POST['notice']) ? $_POST['notice'] : '';
+		$notice_row = M("config")->where("name = 'notice'")->find();
+		if(empty($notice_row)) {
+			$data = array('name' => 'notice', 'value' => $notice);
+			if(M('config')->add($data)) $this->success('公告保存成功');
+			else $this->error('公告保存失败');
+		} else {
+			$data = array('value' => $notice);
+			M('config')->where("name = 'notice'")->save(array('value' => $notice));
+			$this->success('公告保存成功');
+		}
 	}
 }
