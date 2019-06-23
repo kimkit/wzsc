@@ -113,6 +113,13 @@ class IndexAction extends Action {
 		
 		//获取热门总数
 		$hot_count = M('link')->where("cnum>0 AND own=0")->count();
+
+		//获取点击数最多的10条记录
+		$click_top_rows = M('link')->order("click desc")->limit(10)->select();
+		$click_top_lids = array();
+		foreach ($click_top_rows as $row) {
+			$click_top_lids[] = $row['lid'];
+		}
 		
 		//地区信息
 		$area = @include_once(COMMON_PATH.'area.php');
@@ -134,6 +141,7 @@ class IndexAction extends Action {
 		$this->assign('total_count', $total_count);
 		$this->assign('hot_count', $hot_count);
 		$this->assign('my_count', $my_count);
+		$this->assign('click_top_lids', $click_top_lids);
 		
 		$this->assign('is_intact', $this->checkUser());
 		$this->assign('is_home', $is_home);
@@ -329,5 +337,17 @@ END;
 			$this->success('删除收藏成功!', true);
 		else
 			$this->error('删除收藏失败!', true);
+	}
+
+	//增加点击
+	public function linkClickAdd() {
+		$lid = isset($_GET['lid']) ? (int)$_GET['lid'] : 0;
+		$link = M('link')->where("lid = '{$lid}'")->find();
+		if(empty($link)) {
+			header("location: ".U("Index/index"));
+		} else {
+			M('link')->where("lid = '{$lid}'")->setInc('click');
+			header("location: ".$link['url']);
+		}
 	}
 }

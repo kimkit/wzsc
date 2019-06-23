@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `{$db_prefix}link` (
   `url` varchar(255) NOT NULL,
   `sort` int(11) NOT NULL,
   `rank` int(11) NOT NULL,
+  `click` int(11) NOT NULL,
   `own` tinyint(4) NOT NULL,
   `cnum` int(11) NOT NULL DEFAULT '0',
   `fnum` int(11) NOT NULL DEFAULT '0',
