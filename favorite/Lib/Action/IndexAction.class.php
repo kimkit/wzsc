@@ -114,14 +114,16 @@ class IndexAction extends Action {
 		//获取热门总数
 		$hot_count = M('link')->where("cnum>0 AND own=0")->count();
 
-		//获取点击数最多的10条记录
+		//获取点击数最多的5条记录
 		$click_top_lids = array();
 		foreach ($list_sort as $row) {
-			$click_top_rows = M('link')->where("sort = {$row['sid']}")->order("click desc, lid desc")->limit(10)->select();
+			$click_top_rows = M('link')->where("sort = {$row['sid']}")->order("click desc, lid desc")->limit(5)->select();
 			foreach ($click_top_rows as $_row) {
 				$click_top_lids[] = $_row['lid'];
 			}
 		}
+
+		var_dump($click_top_lids);
 
 		//获取公告信息
 		$notice_row = M('config')->where("name = 'notice'")->find();
