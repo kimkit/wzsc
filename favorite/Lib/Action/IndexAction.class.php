@@ -123,8 +123,6 @@ class IndexAction extends Action {
 			}
 		}
 
-		var_dump($click_top_lids);
-
 		//获取公告信息
 		$notice_row = M('config')->where("name = 'notice'")->find();
 		$notice = '';
